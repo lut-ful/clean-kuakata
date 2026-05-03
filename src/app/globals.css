@@ -1,16 +1,35 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-teal: #0b6e4f;
-  --color-teal-dark: #094d38;
-  --color-sand: #e8c97a;
-  --color-coral: #d84040;
-  --color-coral-dark: #b83333;
-  --color-offwhite: #f8f6f0;
-  --color-charcoal: #1e1e1e;
+  /* ── Primary brand colors (remapped to client palette) ── */
+  --color-teal:        #15734B;   /* Dark Green  — nav, section bgs, headings */
+  --color-teal-dark:   #0f5a3a;   /* Hover shade for Dark Green */
+  --color-sand:        #F7CE89;   /* Light Orange — countdown, highlights, sand accents */
+  --color-coral:       #EFA031;   /* Orange/Gold  — CTA buttons, action elements */
+  --color-coral-dark:  #B57321;   /* Dark Gold    — hover state for CTAs */
+  --color-offwhite:    #E8F8EE;   /* Faded Green  — page background */
+  --color-charcoal:    #1E1E1E;   /* Body text    — unchanged */
+
+  /* ── Full Green Palette ── */
+  --color-green-dark:  #15734B;
+  --color-green:       #28A770;
+  --color-green-light: #9EE0BD;
+  --color-green-faded: #E8F8EE;
+
+  /* ── Full Blue Palette ── */
+  --color-blue-dark:   #2362A2;
+  --color-blue:        #478BE7;
+  --color-blue-light:  #8CBDF4;
+  --color-blue-faded:  #E9F2FC;
+
+  /* ── Full Warm (Orange/Gold) Palette ── */
+  --color-gold-dark:   #B57321;
+  --color-gold:        #EFA031;
+  --color-gold-light:  #F7CE89;
+  --color-gold-faded:  #FDF4E6;
 
   --font-heading: var(--font-playfair);
-  --font-body: var(--font-inter);
+  --font-body:    var(--font-inter);
 }
 
 html {
@@ -18,21 +37,20 @@ html {
 }
 
 body {
-  background-color: #f8f6f0;
+  background-color: #E8F8EE;
   color: #1e1e1e;
   font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 @keyframes bounce-arrow {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
+  50%       { transform: translateY(8px); }
 }
-
 .animate-bounce-arrow {
   animation: bounce-arrow 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  50%       { opacity: 0.4; }
 }

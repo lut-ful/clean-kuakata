@@ -1,22 +1,21 @@
 import Image from "next/image";
-import { SOCIAL } from "@/config/social";
+import { SOCIAL, HASHTAGS } from "@/config/social";
 import { SITE } from "@/config/site";
 import { SPONSORS, TIER_META, getSponsorLabel } from "@/config/sponsors";
+import CoalsLogo from "@/components/CoalsLogo";
 
 const TIER_ORDER = ["platinum", "gold", "silver", "inkind"] as const;
 const confirmedSponsors = SPONSORS.filter((s) => !s.demo);
 
 const QUICK_LINKS = [
-  { label: "About CleanKuakata", href: "#about" },
+  { label: "About the Event", href: "#about" },
   { label: "The Crisis", href: "#crisis" },
   { label: "Event Details", href: "#event" },
+  { label: "About COALS", href: "/coals" },
   { label: "Become a Sponsor", href: SITE.forms.sponsor },
   { label: "Volunteer Sign-Up", href: SITE.forms.volunteer },
   { label: "Press & Media", href: "#media" },
-  { label: "Recent Activities", href: "#activities" },
 ];
-
-const HASHTAGS = ["#PlasticFreeKuakata", "#CleanKuakata", "#SaveKuakata", "#NowForClimate"];
 
 export default function Footer() {
   return (
@@ -28,9 +27,20 @@ export default function Footer() {
             <p className="font-heading text-xl font-bold mb-0.5">
               🌊 CleanKuakata
             </p>
-            <p className="text-sand/70 text-xs mb-3 tracking-wide">
+            <p className="text-sand/70 text-xs mb-1 tracking-wide">
               Plastic-Free Kuakata 2026
             </p>
+            <div className="flex items-center gap-2 mb-4">
+              <CoalsLogo
+                variant="icon"
+                primaryColor="#9EE0BD"
+                secondaryColor="#5E7A6A"
+                iconSize={18}
+              />
+              <p className="text-green/60 text-xs tracking-wide">
+                A COALS Global Foundation initiative
+              </p>
+            </div>
             <p className="text-white/40 text-sm mb-5 leading-relaxed">
               June 5 · Kuakata Beach · Bangladesh
               <br />
@@ -40,7 +50,7 @@ export default function Footer() {
               {HASHTAGS.map((tag) => (
                 <span
                   key={tag}
-                  className="text-teal text-xs font-medium hover:text-sand transition-colors cursor-pointer"
+                  className="text-green text-xs font-medium hover:text-sand transition-colors cursor-pointer"
                 >
                   {tag}
                 </span>
@@ -73,6 +83,15 @@ export default function Footer() {
               >
                 <span>📷</span> Instagram
                 <span className="text-white/25 text-xs">{SOCIAL.instagram.handle}</span>
+              </a>
+              <a
+                href={SOCIAL.coals.instagram}
+                className="flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>🌊</span> COALS Global
+                <span className="text-white/25 text-xs">{SOCIAL.coals.handle}</span>
               </a>
               <a
                 href={SOCIAL.whatsapp.chatUrl}
@@ -137,7 +156,9 @@ export default function Footer() {
                 <p className="text-white/30 text-xs mb-1">Volunteer Registration</p>
                 <a
                   href={SITE.forms.volunteer}
-                  className="text-teal hover:text-sand text-sm transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green hover:text-sand text-sm transition-colors"
                 >
                   → Fill out the volunteer form
                 </a>
@@ -146,9 +167,22 @@ export default function Footer() {
                 <p className="text-white/30 text-xs mb-1">Sponsorship Enquiries</p>
                 <a
                   href={SITE.forms.sponsor}
-                  className="text-teal hover:text-sand text-sm transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green hover:text-sand text-sm transition-colors"
                 >
                   → Fill out the sponsor form
+                </a>
+              </div>
+              <div>
+                <p className="text-white/30 text-xs mb-1">COALS Global Foundation</p>
+                <a
+                  href={SOCIAL.coals.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-light/60 hover:text-blue-light text-sm transition-colors"
+                >
+                  → coals.global
                 </a>
               </div>
             </div>
@@ -158,7 +192,7 @@ export default function Footer() {
         {/* Confirmed sponsors strip */}
         {confirmedSponsors.length > 0 && (
           <div className="border-t border-white/10 pt-8 mb-8">
-            <p className="text-white/25 text-[10px] uppercase tracking-widest font-semibold mb-5 text-center">
+            <p className="text-white/50 text-[10px] uppercase tracking-widest font-semibold mb-5 text-center">
               Our Partners
             </p>
             <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
@@ -169,7 +203,7 @@ export default function Footer() {
                     const accent = TIER_META[tier].accentHex;
                     const chip = (
                       <span className="flex items-center gap-2 group">
-                        <span className="text-white/20 text-[9px] uppercase tracking-widest font-semibold whitespace-nowrap">
+                        <span className="text-white/50 text-[9px] uppercase tracking-widest font-semibold whitespace-nowrap">
                           {getSponsorLabel(s)}
                         </span>
                         {s.logo ? (
@@ -204,8 +238,21 @@ export default function Footer() {
         )}
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-3 text-white/30 text-xs">
-          <p>© 2026 CleanKuakata · Plastic-Free Kuakata 2026</p>
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 text-white/30 text-xs">
+          <div>
+            <p>© 2026 CleanKuakata · Plastic-Free Kuakata 2026</p>
+            <p className="mt-1">
+              An initiative of{" "}
+              <a
+                href={SOCIAL.coals.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-light/40 hover:text-blue-light/70 transition-colors"
+              >
+                COALS Global Foundation · coals.global
+              </a>
+            </p>
+          </div>
           <p>A community-powered environmental initiative · All rights reserved</p>
         </div>
       </div>

@@ -11,7 +11,7 @@ import Volunteer from "@/components/Volunteer";
 import RecentActivities from "@/components/RecentActivities";
 import Media from "@/components/Media";
 import SocialLinks from "@/components/SocialLinks";
-// import Organizers from "@/components/Organizers"; // commented out — to be integrated later
+import CoalsSection from "@/components/CoalsSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -20,16 +20,16 @@ export default function Home() {
     <>
       <Nav />
       <main>
-        {/* 1. Hero — full viewport, countdown, CTAs */}
+        {/* 1. Hero — full viewport, countdown, sponsor credits */}
         <Hero />
 
         {/* 2. Impact stats bar */}
         <Stats />
 
-        {/* 3. Kuakata photo slideshow — what we're fighting for */}
+        {/* 3. Kuakata photo slideshow */}
         <PhotoSlideshow />
 
-        {/* 4. About the event + CleanKuakata initiative */}
+        {/* 4. About the event */}
         <About />
 
         {/* 5. The crisis — environmental data */}
@@ -53,12 +53,11 @@ export default function Home() {
         {/* 11. Press & media */}
         <Media />
 
-        {/* 12. Social media links — follow the movement */}
+        {/* 12. Social media links */}
         <SocialLinks />
 
-        {/* Organizers section — commented out until confirmed
-        <Organizers />
-        */}
+        {/* 13. COALS Global Foundation — the organizer */}
+        <CoalsSection />
       </main>
       <Footer />
       <WhatsAppButton />

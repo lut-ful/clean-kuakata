@@ -1,6 +1,8 @@
 import Image from "next/image";
 import CountdownTimer from "./CountdownTimer";
+import Link from "next/link";
 import { SPONSORS, TIER_META, getSponsorLabel, type Sponsor } from "@/config/sponsors";
+import CoalsLogo from "@/components/CoalsLogo";
 
 const confirmed = SPONSORS.filter((s) => !s.demo);
 const platinum = confirmed.filter((s) => s.tier === "platinum");
@@ -59,7 +61,7 @@ export default function Hero() {
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pt-24 pb-16 w-full">
 
         {/* WED badge */}
-        <div className="inline-flex flex-wrap justify-center items-center gap-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-white text-xs sm:text-sm font-medium mb-6">
+        <div className="inline-flex flex-wrap justify-center items-center gap-1.5 bg-gold/10 backdrop-blur-sm border border-gold/30 rounded-full px-4 py-2 text-gold-light text-xs sm:text-sm font-semibold mb-6">
           <span>🌍</span>
           <span className="hidden sm:inline">World Environment Day 2026 · June 5 · Bangladesh</span>
           <span className="sm:hidden">World Environment Day 2026</span>
@@ -96,6 +98,23 @@ export default function Hero() {
           we fight back.
         </p>
 
+        {/* Organizer — COALS */}
+        <div className="mb-8 flex flex-col items-center gap-2">
+          <span className="text-white/55 text-[10px] uppercase tracking-[0.25em] font-semibold">
+            Organized by
+          </span>
+          <Link href="/coals" className="group">
+            <CoalsLogo
+              variant="compact"
+              primaryColor="#ffffff"
+              secondaryColor="#9EE0BD"
+              textColor="#ffffff"
+              iconSize={40}
+              className="group-hover:opacity-75 transition-opacity"
+            />
+          </Link>
+        </div>
+
         {/* Countdown */}
         <div className="mb-10">
           <CountdownTimer />
@@ -120,20 +139,20 @@ export default function Hero() {
         {/* ── ZONE 2: GOLD ─────────────────────────────────────────────────────── */}
         {/* Below CTAs — secondary prominence, clearly branded */}
         {gold.length > 0 && (
-          <div className="mt-10 pt-8 border-t border-white/10">
-            <p className="text-white/30 text-[10px] uppercase tracking-[0.2em] font-semibold mb-4">
+          <div className="mt-10 pt-8 border-t border-white/15">
+            <p className="text-white/60 text-[10px] uppercase tracking-[0.2em] font-semibold mb-4">
               Co-sponsored by
             </p>
             <div className="flex flex-wrap items-center justify-center gap-6">
               {gold.map((s) => (
                 <SponsorLink key={s.id} sponsor={s}>
-                  <div className="flex items-center gap-2 opacity-75 hover:opacity-100 transition-opacity">
+                  <div className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                     {s.presenterLabel && (
-                      <span className="text-white/30 text-[9px] uppercase tracking-widest font-semibold">
+                      <span className="text-white/65 text-[9px] uppercase tracking-widest font-semibold">
                         {s.presenterLabel}
                       </span>
                     )}
-                    <SponsorName sponsor={s} className="text-sm opacity-90" />
+                    <SponsorName sponsor={s} className="text-sm" />
                   </div>
                 </SponsorLink>
               ))}
@@ -144,15 +163,15 @@ export default function Hero() {
         {/* ── ZONE 3: SILVER + IN-KIND ─────────────────────────────────────────── */}
         {/* Thin credits line at very bottom — like a film credit roll */}
         {bottom.length > 0 && (
-          <div className={`${gold.length > 0 ? "mt-5" : "mt-10 pt-8 border-t border-white/10"}`}>
+          <div className={`${gold.length > 0 ? "mt-5" : "mt-10 pt-8 border-t border-white/15"}`}>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
               {bottom.map((s, i) => (
-                <span key={s.id} className="flex items-center gap-2 text-white/30 text-xs">
-                  {i > 0 && <span className="text-white/15">·</span>}
-                  <span className="text-white/20 text-[9px] uppercase tracking-widest font-semibold">
+                <span key={s.id} className="flex items-center gap-2 text-white/55 text-xs">
+                  {i > 0 && <span className="text-white/30">·</span>}
+                  <span className="text-white/50 text-[9px] uppercase tracking-widest font-semibold">
                     {getSponsorLabel(s)}
                   </span>
-                  <SponsorName sponsor={s} className="text-xs opacity-60" />
+                  <SponsorName sponsor={s} className="text-xs opacity-85" />
                 </span>
               ))}
             </div>

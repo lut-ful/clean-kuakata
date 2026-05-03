@@ -3,22 +3,30 @@ import { SITE } from "@/config/site";
 const PRESS_PROVIDES = [
   "Official event access and dedicated media zone",
   "Pre-event briefing and statistics pack",
-  "Interview access to organizers, UNDP representatives, and local community leaders",
+  "Interview access to COALS organizers, UNDP representatives, and local community leaders",
   "High-resolution event photos (post-event)",
   "Full impact data and post-event report",
 ];
 
+/**
+ * Standard press attribution language:
+ * "Organized by COALS Global Foundation, with founding community support from Active Mind and QualFix."
+ */
 export default function Media() {
   return (
-    <section className="bg-offwhite py-20 md:py-24">
+    <section id="media" className="bg-offwhite py-20 md:py-24 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-xs tracking-[0.25em] uppercase font-semibold text-teal mb-4">
           For the Press
         </p>
 
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-8 leading-tight">
+        <h2 className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-3 leading-tight">
           Cover the story Bangladesh needs to tell.
         </h2>
+        <p className="text-charcoal/50 text-sm mb-8 max-w-xl">
+          Organized by <strong className="text-charcoal">COALS Global Foundation</strong>,
+          with founding community support from Active Mind and QualFix.
+        </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
@@ -39,6 +47,17 @@ export default function Media() {
                 </li>
               ))}
             </ul>
+
+            {/* Press attribution block */}
+            <div className="mt-8 bg-blue-faded border border-blue-light/40 rounded-xl p-5">
+              <p className="text-xs text-blue-dark/60 uppercase tracking-wider mb-2 font-semibold">
+                Standard press attribution
+              </p>
+              <p className="text-sm text-charcoal/70 italic leading-relaxed">
+                &ldquo;Organized by COALS Global Foundation, with founding community
+                support from Active Mind and QualFix.&rdquo;
+              </p>
+            </div>
           </div>
 
           <div className="flex flex-col gap-4 justify-start">

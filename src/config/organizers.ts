@@ -1,13 +1,11 @@
 /**
  * ORGANIZERS CONFIG
  * ─────────────────
- * To add or update an organizer or collaborator:
- *   1. Edit the ORGANIZERS or COLLABORATORS array below.
- *   2. Set `logo` to the file path in /public/organizers/ (e.g. "/organizers/active-mind.png").
- *      Recommended size: 200×200 px, transparent PNG.
- *      Leave as null to show the emoji `icon` instead.
- *   3. Set `active: true` to show the organizer in the Organizers section on the site.
- *      Set `active: false` to hide without deleting the data.
+ * COALS Global Foundation is the lead organizer.
+ * Active Mind and QualFix are Founding Community Partners.
+ *
+ * To show an organizer: set `active: true`.
+ * To add a logo: set `logo` to the path in /public/organizers/ (200×200px transparent PNG).
  */
 
 export type Organizer = {
@@ -15,13 +13,9 @@ export type Organizer = {
   name: string;
   tagline: string;
   bio: string;
-  /** Path in /public/organizers/ — e.g. "/organizers/active-mind.png". null = show emoji icon. */
   logo: string | null;
-  /** Website URL — null to disable link */
   url: string | null;
-  /** Emoji shown when no logo is set */
   icon: string;
-  /** Set false to hide from the public site without deleting */
   active: boolean;
 };
 
@@ -36,28 +30,34 @@ export type Collaborator = {
 
 export const ORGANIZERS: Organizer[] = [
   {
-    id: "active-mind",
-    name: "Active Mind",
-    tagline: "Youth-led. Community-powered.",
-    bio: "A youth-led organization dedicated to leadership development, community engagement, and social impact across Bangladesh. Active Mind believes that young people are not the leaders of tomorrow — they are the leaders of today.",
-    logo: null,                       // → "/organizers/active-mind.png" when ready
-    url: null,
-    icon: "🌱",
-    active: false,                    // set true when confirmed for public display
-  },
-  {
-    id: "qualfix",
-    name: "QualFix",
-    tagline: "Technology for purpose-led change.",
-    bio: "A technology and innovation company supporting community-driven solutions for environmental and social challenges. QualFix brings digital infrastructure, data systems, and creative strategy to purpose-led initiatives.",
-    logo: null,                       // → "/organizers/qualfix.png" when ready
-    url: null,
-    icon: "⚡",
-    active: false,                    // set true when confirmed for public display
+    id: "coals",
+    name: "COALS Global Foundation",
+    tagline: "Circular Oceanic And Land Systems",
+    bio: "COALS — Circular Oceanic And Land Systems — is a global environmental foundation being established through the act of Plastic-Free Kuakata 2026. Born from the collaboration of Bangladesh's youth leaders and technology innovators, COALS exists to convert one-day environmental events into permanent circular systems. This event is its founding initiative.",
+    logo: null,                       // → "/organizers/coals.png" when ready
+    url: "https://coals.global",
+    icon: "🌊",
+    active: true,
   },
 ];
 
 export const COLLABORATORS: Collaborator[] = [
+  {
+    id: "active-mind",
+    name: "Active Mind",
+    role: "Founding Community Partner",
+    logo: null,                       // → "/organizers/active-mind.png" when ready
+    url: null,
+    active: true,
+  },
+  {
+    id: "qualfix",
+    name: "QualFix",
+    role: "Founding Community Partner",
+    logo: null,                       // → "/organizers/qualfix.png" when ready
+    url: null,
+    active: true,
+  },
   {
     id: "bd-clean",
     name: "BD Clean",

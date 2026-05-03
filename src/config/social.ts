@@ -1,47 +1,48 @@
 /**
  * SOCIAL MEDIA CONFIG
  * ───────────────────
- * Update any link here and it updates across the entire site
- * (Footer, SocialLinks section, WhatsApp button, Nav CTA).
- *
+ * Update any link here and it updates across the entire site.
  * Set a value to null to hide that platform from the UI.
  */
 
 export const SOCIAL = {
+  /** Plastic-Free Kuakata 2026 event accounts */
   facebook: {
-    /** The CleanKuakata Facebook page */
-    page: "https://facebook.com/PlasticFreeKuakata",
-    /** The Facebook Event for June 5 — replace with real event link */
-    event: "https://facebook.com/events/XXXXXXXXX",
+    page:   "https://facebook.com/PlasticFreeKuakata",
+    event:  "https://facebook.com/events/XXXXXXXXX",  // replace with real event link
     handle: "@PlasticFreeKuakata",
   },
 
   instagram: {
-    /** The CleanKuakata Instagram page */
-    page: "https://instagram.com/PlasticFreeKuakata",
-    /** Instagram event highlight or reel link — set to null if not needed */
-    event: null as string | null,
+    page:   "https://instagram.com/PlasticFreeKuakata",
+    event:  null as string | null,
     handle: "@PlasticFreeKuakata",
   },
 
+  /** COALS Global Foundation organizer accounts */
+  coals: {
+    facebook:  "https://facebook.com/COALSglobal",
+    instagram: "https://instagram.com/COALSglobal",
+    handle:    "@COALSglobal",
+    website:   "https://coals.global",
+  },
+
   whatsapp: {
-    /** Full number with country code, no spaces or dashes */
     number: "8801571337605",
-    /** Direct chat link — auto-generated from number */
     get chatUrl() {
       return `https://wa.me/${this.number}`;
     },
-    /** Label shown in the UI */
     label: "+880 1571 337605",
   },
 
-  youtube: null as {
-    page: string;
-    handle: string;
-  } | null,
-  // Uncomment and fill in when YouTube channel is ready:
-  // youtube: {
-  //   page: "https://youtube.com/@CleanKuakata",
-  //   handle: "@CleanKuakata",
-  // },
+  youtube: null as { page: string; handle: string } | null,
 } as const;
+
+/** Canonical hashtags used across all platforms and posts */
+export const HASHTAGS = [
+  "#PlasticFreeKuakata",
+  "#COALSglobal",
+  "#CleanKuakata",
+  "#SaveKuakata",
+  "#NowForClimate",
+] as const;

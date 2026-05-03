@@ -1,17 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { SPONSORS, getSponsorLabel } from "@/config/sponsors";
+import CoalsLogo from "@/components/CoalsLogo";
 
-const NAV_LINKS = [
+type NavLink = { label: string; href: string; page?: boolean };
+
+const NAV_LINKS: NavLink[] = [
   { label: "About", href: "#about" },
   { label: "Crisis", href: "#crisis" },
   { label: "Event", href: "#event" },
   { label: "Sponsors", href: "#sponsors" },
   { label: "Volunteer", href: "#volunteer" },
   { label: "Activities", href: "#activities" },
-  { label: "Connect", href: "#connect" },
+  { label: "COALS", href: "/coals", page: true },
 ];
 
 const titleSponsor = SPONSORS.find((s) => !s.demo && s.tier === "platinum") ?? null;
@@ -34,23 +38,33 @@ export default function Nav() {
             </span>
           </a>
 
-          {/* Desktop nav links — visible from xl (1280px) up */}
+          {/* Desktop nav links — xl+ only */}
           <div className="hidden xl:flex items-center gap-5">
-            {NAV_LINKS.map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                className="text-white/85 hover:text-sand text-[14px] font-medium transition-colors whitespace-nowrap"
-              >
-                {label}
-              </a>
-            ))}
+            {NAV_LINKS.map(({ label, href, page }) =>
+              page ? (
+                <Link
+                  key={label}
+                  href={href}
+                  className="inline-flex items-center gap-1.5 text-sand/80 hover:text-sand text-[14px] font-semibold transition-colors whitespace-nowrap border-b border-sand/30 hover:border-sand/70 pb-0.5"
+                >
+                  <CoalsLogo variant="icon" primaryColor="#F7CE89" secondaryColor="#A89050" iconSize={16} />
+                  {label}
+                </Link>
+              ) : (
+                <a
+                  key={label}
+                  href={href}
+                  className="text-white/85 hover:text-sand text-[14px] font-medium transition-colors whitespace-nowrap"
+                >
+                  {label}
+                </a>
+              )
+            )}
           </div>
 
-          {/* Right side: sponsor badge + CTA + hamburger */}
+          {/* Right side */}
           <div className="flex items-center gap-2 sm:gap-3">
-
-            {/* Platinum "Presented by" — xl+ only */}
+            {/* Platinum sponsor badge — xl+ only */}
             {titleSponsor && (
               <a
                 href={titleSponsor.url && titleSponsor.url !== "#" ? titleSponsor.url : undefined}
@@ -58,7 +72,7 @@ export default function Nav() {
                 rel="noopener noreferrer"
                 className="hidden xl:flex items-center gap-2 border-l border-white/20 pl-4"
               >
-                <span className="text-white/40 text-[10px] uppercase tracking-widest font-semibold whitespace-nowrap">
+                <span className="text-white/70 text-[10px] uppercase tracking-widest font-semibold whitespace-nowrap">
                   {getSponsorLabel(titleSponsor)}
                 </span>
                 {titleSponsor.logo ? (
@@ -77,17 +91,16 @@ export default function Nav() {
               </a>
             )}
 
-            {/* CTA button */}
+            {/* CTA */}
             <a
               href="#volunteer"
               className="bg-coral text-white rounded-full font-semibold hover:bg-coral-dark transition-colors whitespace-nowrap px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm"
             >
-              {/* Short on xs–lg, full on xl+ */}
               <span className="xl:hidden">Join →</span>
               <span className="hidden xl:inline">Join the Movement →</span>
             </a>
 
-            {/* Hamburger — visible up to xl */}
+            {/* Hamburger — below xl */}
             <button
               className="xl:hidden text-white p-1"
               onClick={() => setMenuOpen((v) => !v)}
@@ -104,23 +117,35 @@ export default function Nav() {
           </div>
         </div>
 
-        {/* Mobile / tablet menu — up to xl */}
+        {/* Mobile / tablet menu */}
         {menuOpen && (
           <div className="xl:hidden pb-4 pt-1 flex flex-col">
-            {NAV_LINKS.map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                className="text-white/90 hover:text-sand hover:bg-white/5 text-[15px] font-medium transition-colors px-3 py-3 rounded-lg"
-              >
-                {label}
-              </a>
-            ))}
-            {/* Platinum sponsor at bottom of mobile menu */}
+            {NAV_LINKS.map(({ label, href, page }) =>
+              page ? (
+                <Link
+                  key={label}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="inline-flex items-center gap-2 text-sand/90 hover:text-sand hover:bg-white/5 text-[15px] font-semibold transition-colors px-3 py-3 rounded-lg"
+                >
+                  <CoalsLogo variant="icon" primaryColor="#F7CE89" secondaryColor="#A89050" iconSize={18} />
+                  {label} ↗
+                </Link>
+              ) : (
+                <a
+                  key={label}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-white/90 hover:text-sand hover:bg-white/5 text-[15px] font-medium transition-colors px-3 py-3 rounded-lg"
+                >
+                  {label}
+                </a>
+              )
+            )}
+            {/* Platinum sponsor in mobile menu */}
             {titleSponsor && (
               <div className="mt-2 pt-3 border-t border-white/10 px-3 flex items-center gap-2">
-                <span className="text-white/35 text-[10px] uppercase tracking-widest font-semibold">
+                <span className="text-white/65 text-[10px] uppercase tracking-widest font-semibold">
                   {getSponsorLabel(titleSponsor)}
                 </span>
                 {titleSponsor.logo ? (

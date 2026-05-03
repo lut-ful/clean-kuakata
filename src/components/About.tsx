@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const PILLARS = [
   {
     icon: "🧹",
@@ -20,24 +22,23 @@ export default function About() {
   return (
     <section id="about" className="bg-offwhite py-20 md:py-28 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Label */}
         <p className="text-xs tracking-[0.25em] uppercase font-semibold text-teal mb-4">
           What Is This
         </p>
 
-        {/* Headline */}
         <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal max-w-2xl mb-8 leading-tight">
           Bangladesh&apos;s Biggest Beach Clean-Up.{" "}
           <span className="text-teal">Not just an event — a movement.</span>
         </h2>
 
-        {/* Body */}
         <div className="max-w-3xl space-y-4 text-charcoal/75 text-base md:text-lg leading-relaxed mb-16">
           <p>
             The Plastic-Free Kuakata Initiative is a national-scale,
             community-powered environmental action organized by{" "}
-            <strong className="text-charcoal">Active Mind</strong> and{" "}
-            <strong className="text-charcoal">QualFix</strong> on World
+            <Link href="/coals" className="font-semibold text-charcoal hover:text-teal transition-colors">
+              COALS Global Foundation
+            </Link>{" "}
+            in partnership with local community organizations on World
             Environment Day, June 5, 2026.
           </p>
           <p>
@@ -57,7 +58,6 @@ export default function About() {
           <p className="font-semibold text-charcoal">This is our answer.</p>
         </div>
 
-        {/* Pillar cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {PILLARS.map(({ icon, title, body }) => (
             <div
