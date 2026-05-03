@@ -1,8 +1,8 @@
 import { getPostBySlug, getAllPosts } from "@/lib/content";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Link from "next/link";
 
-// Pre-render all known slugs at build time
 export function generateStaticParams() {
   return getAllPosts().map((p) => ({ slug: p.slug }));
 }
@@ -41,21 +41,17 @@ export default async function BlogPost({ params }: Props) {
     year: "numeric",
   });
 
-  // Dynamically import react-markdown only on the server render path
   const { default: ReactMarkdown } = await import("react-markdown");
   const { default: remarkGfm } = await import("remark-gfm");
 
   return (
     <div className="min-h-screen bg-offwhite">
       {/* Header */}
-      <div
-        className="pt-24 pb-16 px-4"
-        style={{ background: post.coverColor }}
-      >
+      <div className="pt-24 pb-16 px-4" style={{ background: post.coverColor }}>
         <div className="max-w-3xl mx-auto">
-          <a href="/blog" className="text-white/50 text-sm hover:text-white transition-colors mb-6 inline-block">
+          <Link href="/blog" className="text-white/50 text-sm hover:text-white transition-colors mb-6 inline-block">
             ← All posts
-          </a>
+          </Link>
           <div className="flex items-center gap-3 mb-4">
             <span className={`text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full ${TYPE_COLOR[post.type] ?? "bg-white/20 text-white"}`}>
               {TYPE_LABEL[post.type] ?? post.type}
@@ -80,26 +76,18 @@ export default async function BlogPost({ params }: Props) {
 
       {/* Article body */}
       <div className="max-w-3xl mx-auto px-4 py-16">
-        <article className="bg-white rounded-2xl p-8 md:p-12 shadow-sm prose prose-lg max-w-none
-          prose-headings:font-heading prose-headings:text-charcoal
-          prose-p:text-charcoal/75 prose-p:leading-relaxed
-          prose-a:text-teal prose-a:no-underline hover:prose-a:underline
-          prose-strong:text-charcoal prose-strong:font-semibold
-          prose-ul:text-charcoal/70 prose-li:marker:text-teal
-          prose-blockquote:border-teal prose-blockquote:text-charcoal/60 prose-blockquote:italic
-          prose-code:text-coral prose-code:bg-offwhite prose-code:px-1 prose-code:rounded
-          prose-hr:border-charcoal/10">
+        <article className="bg-white rounded-2xl p-8 md:p-12 shadow-sm prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-charcoal prose-p:text-charcoal/75 prose-p:leading-relaxed prose-a:text-teal prose-a:no-underline hover:prose-a:underline prose-strong:text-charcoal prose-strong:font-semibold prose-ul:text-charcoal/70 prose-li:marker:text-teal prose-blockquote:border-teal prose-blockquote:text-charcoal/60 prose-blockquote:italic prose-code:text-coral prose-code:bg-offwhite prose-code:px-1 prose-code:rounded prose-hr:border-charcoal/10">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
         </article>
 
         {/* Footer nav */}
         <div className="mt-8 flex justify-between items-center">
-          <a href="/blog" className="text-teal font-semibold text-sm hover:text-teal-dark transition-colors">
+          <Link href="/blog" className="text-teal font-semibold text-sm hover:text-teal-dark transition-colors">
             ← All posts
-          </a>
-          <a href="/#volunteer" className="bg-coral text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-coral-dark transition-colors">
+          </Link>
+          <Link href="/#volunteer" className="bg-coral text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-coral-dark transition-colors">
             Volunteer for June 5 →
-          </a>
+          </Link>
         </div>
       </div>
     </div>

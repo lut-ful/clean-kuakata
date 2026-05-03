@@ -1,3 +1,5 @@
+import { SITE } from "@/config/site";
+
 const PRESS_PROVIDES = [
   "Official event access and dedicated media zone",
   "Pre-event briefing and statistics pack",
@@ -10,12 +12,10 @@ export default function Media() {
   return (
     <section className="bg-offwhite py-20 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Label */}
         <p className="text-xs tracking-[0.25em] uppercase font-semibold text-teal mb-4">
           For the Press
         </p>
 
-        {/* Headline */}
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-charcoal mb-8 leading-tight">
           Cover the story Bangladesh needs to tell.
         </h2>
@@ -33,10 +33,7 @@ export default function Media() {
             </p>
             <ul className="space-y-2">
               {PRESS_PROVIDES.map((item) => (
-                <li
-                  key={item}
-                  className="flex gap-3 text-sm text-charcoal/65 leading-relaxed"
-                >
+                <li key={item} className="flex gap-3 text-sm text-charcoal/65 leading-relaxed">
                   <span className="text-teal shrink-0">·</span>
                   {item}
                 </li>
@@ -52,7 +49,9 @@ export default function Media() {
               → Download Press Kit (PDF)
             </a>
             <a
-              href="mailto:media@plasticfreekuakata.com"
+              href={SITE.forms.media}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-teal text-white px-6 py-4 rounded-xl font-semibold text-sm hover:bg-teal-dark transition-colors text-center"
             >
               → Request Press Accreditation
@@ -62,10 +61,12 @@ export default function Media() {
                 Media contact
               </p>
               <a
-                href="mailto:media@plasticfreekuakata.com"
-                className="text-teal font-medium hover:underline"
+                href={SITE.forms.media}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-teal font-medium hover:underline text-sm"
               >
-                Click here
+                → Fill out the media enquiry form
               </a>
             </div>
           </div>

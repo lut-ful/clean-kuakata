@@ -70,13 +70,24 @@ export const SLIDES: Slide[] = [
     active: true,
   },
   {
+    // https://drive.google.com/file/d/1peuG-zy_690R_ZnLNO1hOFiFs0j0rCm_/view?usp=drive_link
+    id:6,
+    image: "https://drive.google.com/uc?export=view&id=1peuG-zy_690R_ZnLNO1hOFiFs0j0rCm_",                     // → "/images/kuakata-sunset.jpg" when ready
+    gradient: "linear-gradient(135deg, #1a0505 0%, #8b1a1a 40%, #d84040 75%, #e8a07a 100%)",
+    location: "Kuakata Beach",
+    caption: "Sunset at Kuakata is a daily miracle. But plastic pollution threatens to make it disappear.",
+    tag: "Sunset",
+    active: true,
+  }
+  ,
+  {
     //https://drive.google.com/file/d/1-eEmVMBymFH9AgGfMfNToyt-RL7RwRy_/view?usp=drive_link
-    id: 6,
+    id: 7,
     image: "https://drive.google.com/uc?export=view&id=1-eEmVMBymFH9AgGfMfNToyt-RL7RwRy_",                     // → "/images/kuakata-sunset.jpg" when ready
     gradient: "linear-gradient(160deg, #0a1628 0%, #1e3a5f 30%, #0B6E4F 70%, #e8c97a 100%)",
     location: "Kuakata Beach",
     caption: "What 500 volunteers will protect on June 5, 2026. This shore. This light. This future.",
-    tag: "Sunset",
+    tag: "Plastics around Kuakata",
     active: true,
   },
 ];

@@ -1,3 +1,6 @@
+import { SITE } from "@/config/site";
+import { SOCIAL } from "@/config/social";
+
 const ROLES = [
   {
     icon: "🧹",
@@ -34,12 +37,10 @@ export default function Volunteer() {
   return (
     <section id="volunteer" className="bg-teal py-20 md:py-28 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Label */}
         <p className="text-xs tracking-[0.25em] uppercase font-semibold text-sand mb-4">
           Join the Clean-Up
         </p>
 
-        {/* Headline */}
         <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
           One day. One beach.{" "}
           <span className="text-sand">A memory you&apos;ll carry forever.</span>
@@ -77,42 +78,33 @@ export default function Volunteer() {
           ))}
         </div>
 
-        {/* Form area */}
+        {/* Registration */}
         <div className="bg-white rounded-2xl p-8 md:p-10">
           <h3 className="font-heading text-2xl font-bold text-charcoal mb-2">
             Register as a Volunteer
           </h3>
           <p className="text-charcoal/60 text-sm mb-8">
-            Takes 2 minutes. Confirmation email within 3 days. Briefing pack 1
-            week before the event.
+            Takes 2 minutes. Confirmation within 3 days. Briefing pack 1 week before the event.
           </p>
 
-          {/* Tally / Google Form embed placeholder */}
-          {/* Replace the div below with: <iframe src="YOUR_TALLY_OR_GOOGLE_FORM_URL" width="100%" height="600" frameBorder="0" /> */}
-          <div className="w-full bg-offwhite rounded-xl border-2 border-dashed border-teal/20 flex flex-col items-center justify-center py-16 px-8 text-center">
-            <span className="text-4xl mb-4">📋</span>
-            <p className="text-charcoal/60 text-sm mb-4">
-              Volunteer registration form goes here.
-            </p>
-            <p className="text-charcoal/40 text-xs max-w-sm">
-              Replace this block with a Tally.so or Google Form iframe embed —
-              or replace the button href below with the form URL.
-            </p>
-            {/* Replace href with real Tally / Google Form URL */}
-            <a
-              href="#"
-              className="mt-6 bg-coral text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-coral-dark transition-colors"
-            >
-              → Register as Volunteer
-            </a>
-          </div>
+          <a
+            href={SITE.forms.volunteer}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-coral text-white px-8 py-4 rounded-full font-semibold hover:bg-coral-dark transition-colors text-center w-full sm:w-auto"
+          >
+            → Register as Volunteer
+          </a>
 
-          {/* Notes */}
           <div className="mt-6 flex flex-col sm:flex-row gap-4 text-sm text-charcoal/60">
             <span>📩 Confirmation within 3 days of registration</span>
             <span>📋 Briefing pack shared 1 week before the event</span>
-            {/* Replace number below with real WhatsApp number */}
-            <a href="https://wa.me/880XXXXXXXXXX" className="hover:text-teal transition-colors">
+            <a
+              href={SOCIAL.whatsapp.chatUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-teal transition-colors"
+            >
               💬 WhatsApp us
             </a>
           </div>

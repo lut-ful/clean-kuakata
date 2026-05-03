@@ -1,16 +1,20 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
+import { SPONSORS, getSponsorLabel } from "@/config/sponsors";
 
 const NAV_LINKS = [
   { label: "About", href: "#about" },
-  { label: "The Crisis", href: "#crisis" },
+  { label: "Crisis", href: "#crisis" },
   { label: "Event", href: "#event" },
   { label: "Sponsors", href: "#sponsors" },
   { label: "Volunteer", href: "#volunteer" },
   { label: "Activities", href: "#activities" },
-  { label: "SocialLinks", href: "#connect" }
+  { label: "Connect", href: "#connect" },
 ];
+
+const titleSponsor = SPONSORS.find((s) => !s.demo && s.tier === "platinum") ?? null;
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,42 +23,73 @@ export default function Nav() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-teal shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+
           {/* Brand */}
           <a href="#" className="flex flex-col justify-center shrink-0">
             <span className="text-white text-[20px] font-heading font-bold leading-tight">
               🌊 CleanKuakata
             </span>
-            <span className="text-sand/80 text-[12px] leading-tight tracking-wide hidden sm:block">
+            <span className="text-sand/80 text-[11px] leading-tight tracking-wide hidden sm:block">
               Plastic-Free Kuakata 2026
             </span>
           </a>
 
-          {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-6">
+          {/* Desktop nav links — visible from xl (1280px) up */}
+          <div className="hidden xl:flex items-center gap-5">
             {NAV_LINKS.map(({ label, href }) => (
               <a
                 key={label}
                 href={href}
-                className="text-white/85 hover:text-sand text-[15px] font-medium transition-colors"
+                className="text-white/85 hover:text-sand text-[14px] font-medium transition-colors whitespace-nowrap"
               >
                 {label}
               </a>
             ))}
           </div>
 
+          {/* Right side: sponsor badge + CTA + hamburger */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* CTA — short on mobile, full on sm+ */}
+
+            {/* Platinum "Presented by" — xl+ only */}
+            {titleSponsor && (
+              <a
+                href={titleSponsor.url && titleSponsor.url !== "#" ? titleSponsor.url : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden xl:flex items-center gap-2 border-l border-white/20 pl-4"
+              >
+                <span className="text-white/40 text-[10px] uppercase tracking-widest font-semibold whitespace-nowrap">
+                  {getSponsorLabel(titleSponsor)}
+                </span>
+                {titleSponsor.logo ? (
+                  <Image
+                    src={titleSponsor.logo}
+                    alt={titleSponsor.name}
+                    width={68}
+                    height={20}
+                    className="object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+                  />
+                ) : (
+                  <span className="text-sand/80 font-heading font-bold text-sm hover:text-sand transition-colors whitespace-nowrap">
+                    {titleSponsor.name}
+                  </span>
+                )}
+              </a>
+            )}
+
+            {/* CTA button */}
             <a
               href="#volunteer"
-              className="bg-coral text-white rounded-full font-semibold hover:bg-coral-dark transition-colors whitespace-nowrap px-3 py-1.5 text-xs sm:px-5 sm:py-2 sm:text-sm"
+              className="bg-coral text-white rounded-full font-semibold hover:bg-coral-dark transition-colors whitespace-nowrap px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm"
             >
-              <span className="sm:hidden">Join →</span>
-              <span className="hidden sm:inline">Join the Movement →</span>
+              {/* Short on xs–lg, full on xl+ */}
+              <span className="xl:hidden">Join →</span>
+              <span className="hidden xl:inline">Join the Movement →</span>
             </a>
 
-            {/* Hamburger */}
+            {/* Hamburger — visible up to xl */}
             <button
-              className="lg:hidden text-white p-1"
+              className="xl:hidden text-white p-1"
               onClick={() => setMenuOpen((v) => !v)}
               aria-label="Toggle menu"
             >
@@ -69,9 +104,9 @@ export default function Nav() {
           </div>
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile / tablet menu — up to xl */}
         {menuOpen && (
-          <div className="lg:hidden pb-4 pt-1 flex flex-col">
+          <div className="xl:hidden pb-4 pt-1 flex flex-col">
             {NAV_LINKS.map(({ label, href }) => (
               <a
                 key={label}
@@ -82,6 +117,27 @@ export default function Nav() {
                 {label}
               </a>
             ))}
+            {/* Platinum sponsor at bottom of mobile menu */}
+            {titleSponsor && (
+              <div className="mt-2 pt-3 border-t border-white/10 px-3 flex items-center gap-2">
+                <span className="text-white/35 text-[10px] uppercase tracking-widest font-semibold">
+                  {getSponsorLabel(titleSponsor)}
+                </span>
+                {titleSponsor.logo ? (
+                  <Image
+                    src={titleSponsor.logo}
+                    alt={titleSponsor.name}
+                    width={64}
+                    height={20}
+                    className="object-contain brightness-0 invert opacity-60"
+                  />
+                ) : (
+                  <span className="text-sand/70 font-heading font-bold text-sm">
+                    {titleSponsor.name}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>

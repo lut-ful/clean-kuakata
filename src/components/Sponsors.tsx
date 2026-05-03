@@ -1,3 +1,5 @@
+import { SITE } from "@/config/site";
+
 const TIERS = [
   {
     name: "Platinum Guardian",
@@ -69,24 +71,14 @@ const TIERS = [
   },
 ];
 
-const PARTNER_LOGOS = [
-  "BRAC Bank",
-  "Grameenphone",
-  "Aarong",
-  "Shanta Holdings",
-  "UNDP",
-];
-
 export default function Sponsors() {
   return (
     <section id="sponsors" className="bg-offwhite py-20 md:py-28 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Label */}
         <p className="text-xs tracking-[0.25em] uppercase font-semibold text-teal mb-4">
           Become a Sponsor
         </p>
 
-        {/* Headline */}
         <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal mb-6 leading-tight">
           Your brand. Bangladesh&apos;s coastline.{" "}
           <span className="text-teal">A legacy worth having.</span>
@@ -112,33 +104,19 @@ export default function Sponsors() {
               className="rounded-2xl overflow-hidden border shadow-sm flex flex-col"
               style={{ borderColor: accent + "33", backgroundColor: accentBg }}
             >
-              {/* Tier header */}
-              <div
-                className="px-6 py-5 border-b"
-                style={{ borderColor: accent + "33" }}
-              >
-                <p
-                  className="text-xs font-semibold uppercase tracking-wider mb-2"
-                  style={{ color: accent }}
-                >
+              <div className="px-6 py-5 border-b" style={{ borderColor: accent + "33" }}>
+                <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: accent }}>
                   {badge}
                 </p>
-                <h3 className="font-heading text-xl font-bold text-charcoal mb-1">
-                  {name}
-                </h3>
-                <p className="font-semibold text-sm" style={{ color: accent }}>
-                  {price}
-                </p>
+                <h3 className="font-heading text-xl font-bold text-charcoal mb-1">{name}</h3>
+                <p className="font-semibold text-sm" style={{ color: accent }}>{price}</p>
               </div>
 
-              {/* Perks */}
               <div className="px-6 py-5 flex-1">
                 <ul className="space-y-2">
                   {perks.map((perk, i) => (
                     <li key={i} className="flex gap-2 text-sm text-charcoal/70 leading-snug">
-                      <span className="shrink-0" style={{ color: accent }}>
-                        ✦
-                      </span>
+                      <span className="shrink-0" style={{ color: accent }}>✦</span>
                       {perk}
                     </li>
                   ))}
@@ -154,48 +132,32 @@ export default function Sponsors() {
         </div>
 
         {/* CTA box */}
-        <div className="bg-teal rounded-2xl p-8 md:p-10 mb-16">
+        <div className="bg-teal rounded-2xl p-8 md:p-10">
           <h3 className="font-heading text-2xl font-bold text-white mb-2">
             Ready to partner?
           </h3>
           <p className="text-white/70 text-sm mb-6">
-            We respond within 48 hours. Sponsorship proposal PDF available on
-            request.
+            We respond within 48 hours. Sponsorship proposal PDF available on request.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            {/* Sponsor form link — replace href with real Tally / Google Form URL */}
             <a
-              href="#"
+              href={SITE.forms.sponsor}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-sand text-charcoal px-6 py-3 rounded-full font-semibold text-sm hover:bg-sand/90 transition-colors text-center"
             >
               → Submit Sponsorship Interest Form
             </a>
             <a
-              href="mailto:hello@plasticfreekuakata.com"
+              href={SITE.forms.contact}
+              target="_blank"
+              rel="noopener noreferrer"
               className="border-2 border-white/50 text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-white/10 transition-colors text-center"
             >
-              📧 General enquiries
+              → General enquiries
             </a>
           </div>
         </div>
-
-        {/* Partner logo strip — commented out until partners are confirmed
-        <div>
-          <p className="text-xs tracking-widest uppercase text-charcoal/40 mb-6 text-center">
-            Our Partners
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-8">
-            {PARTNER_LOGOS.map((name) => (
-              <div
-                key={name}
-                className="bg-white rounded-lg px-6 py-3 text-charcoal/40 font-semibold text-sm border border-charcoal/8 hover:text-charcoal/60 transition-colors"
-              >
-                {name}
-              </div>
-            ))}
-          </div>
-        </div>
-        */}
       </div>
     </section>
   );

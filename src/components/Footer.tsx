@@ -1,5 +1,10 @@
+import Image from "next/image";
 import { SOCIAL } from "@/config/social";
 import { SITE } from "@/config/site";
+import { SPONSORS, TIER_META, getSponsorLabel } from "@/config/sponsors";
+
+const TIER_ORDER = ["platinum", "gold", "silver", "inkind"] as const;
+const confirmedSponsors = SPONSORS.filter((s) => !s.demo);
 
 const QUICK_LINKS = [
   { label: "About CleanKuakata", href: "#about" },
@@ -109,19 +114,23 @@ export default function Footer() {
               <div>
                 <p className="text-white/30 text-xs mb-1">General Enquiries</p>
                 <a
-                  href={`mailto:${SITE.emails.general}`}
+                  href={SITE.forms.contact}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white/60 hover:text-sand text-sm transition-colors"
                 >
-                  {SITE.emails.general}
+                  → Contact form
                 </a>
               </div>
               <div>
                 <p className="text-white/30 text-xs mb-1">Media & Press</p>
                 <a
-                  href={`mailto:${SITE.emails.media}`}
+                  href={SITE.forms.media}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white/60 hover:text-sand text-sm transition-colors"
                 >
-                  {SITE.emails.media}
+                  → Media enquiry form
                 </a>
               </div>
               <div>
@@ -145,6 +154,54 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        {/* Confirmed sponsors strip */}
+        {confirmedSponsors.length > 0 && (
+          <div className="border-t border-white/10 pt-8 mb-8">
+            <p className="text-white/25 text-[10px] uppercase tracking-widest font-semibold mb-5 text-center">
+              Our Partners
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
+              {TIER_ORDER.map((tier) =>
+                confirmedSponsors
+                  .filter((s) => s.tier === tier)
+                  .map((s) => {
+                    const accent = TIER_META[tier].accentHex;
+                    const chip = (
+                      <span className="flex items-center gap-2 group">
+                        <span className="text-white/20 text-[9px] uppercase tracking-widest font-semibold whitespace-nowrap">
+                          {getSponsorLabel(s)}
+                        </span>
+                        {s.logo ? (
+                          <Image
+                            src={s.logo}
+                            alt={s.name}
+                            width={80}
+                            height={24}
+                            className="object-contain brightness-0 invert opacity-40 group-hover:opacity-70 transition-opacity"
+                          />
+                        ) : (
+                          <span
+                            className="font-heading font-bold text-sm opacity-50 group-hover:opacity-80 transition-opacity"
+                            style={{ color: accent }}
+                          >
+                            {s.name}
+                          </span>
+                        )}
+                      </span>
+                    );
+                    return s.url && s.url !== "#" ? (
+                      <a key={s.id} href={s.url} target="_blank" rel="noopener noreferrer">
+                        {chip}
+                      </a>
+                    ) : (
+                      <span key={s.id}>{chip}</span>
+                    );
+                  })
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-3 text-white/30 text-xs">

@@ -6,10 +6,19 @@
  *   2. Set `logo` to the file path in /public/sponsors/ (e.g. "/sponsors/acme.png").
  *      Recommended logo size: 300×120 px, transparent PNG, on white or transparent bg.
  *      Leave as null to display the sponsor name as styled text instead.
- *   3. Set `demo: false` once the sponsor is confirmed.
+ *   3. Set `demo: true` once the sponsor is confirmed.
+ *   4. Optionally set `presenterLabel` to customize how they appear in the Hero and
+ *      Footer strip (e.g. "Official Water Partner"). Defaults to the tier's standard
+ *      label if not set.
  *
  * Tier order (displayed top-to-bottom, large-to-small):
  *   platinum → gold → silver → inkind
+ *
+ * Confirmed sponsors (demo: true) automatically appear in:
+ *   • Hero credit strip  (all tiers)
+ *   • Nav "Presented by" badge  (platinum only, first one)
+ *   • SponsorsDisplay section
+ *   • Footer sponsor strip
  */
 
 export type SponsorTier = "platinum" | "gold" | "silver" | "inkind";
@@ -22,9 +31,15 @@ export type Sponsor = {
   logo: string | null;
   /** Sponsor website — null to disable the link */
   url: string | null;
-  /** Short tagline shown under the logo */
+  /** Short tagline shown under the logo in the sponsors section */
   tagline?: string;
-  /** true = demo placeholder. Set to false once sponsor is confirmed & paid. */
+  /**
+   * Label shown in the Hero credit strip and footer strip.
+   * Defaults to TIER_META[tier].heroLabel if not set.
+   * Override per-sponsor for custom roles: "Official Water Partner", "Co-sponsored by", etc.
+   */
+  presenterLabel?: string;
+  /** true = demo placeholder. Set to false once the sponsor is confirmed & paid. */
   demo: boolean;
 };
 
@@ -92,29 +107,41 @@ export const SPONSORS: Sponsor[] = [
   },
 ];
 
-export const TIER_META: Record<SponsorTier, { label: string; color: string; accentHex: string; bgHex: string }> = {
+export const TIER_META: Record<
+  SponsorTier,
+  { label: string; heroLabel: string; color: string; accentHex: string; bgHex: string }
+> = {
   platinum: {
     label: "Platinum Guardian",
+    heroLabel: "Presented by",
     color: "text-[#D4A017]",
     accentHex: "#D4A017",
     bgHex: "#fdf8ec",
   },
   gold: {
     label: "Ocean Guardian",
+    heroLabel: "Co-sponsored by",
     color: "text-teal",
     accentHex: "#0B6E4F",
     bgHex: "#f0faf5",
   },
   silver: {
     label: "Shoreline Supporter",
+    heroLabel: "Supported by",
     color: "text-coral",
     accentHex: "#D84040",
     bgHex: "#fef5f5",
   },
   inkind: {
     label: "Supply Partner",
+    heroLabel: "In partnership with",
     color: "text-charcoal/50",
     accentHex: "#6B7280",
     bgHex: "#f9fafb",
   },
 };
+
+/** Returns the display label for a sponsor in hero/nav/footer contexts. */
+export function getSponsorLabel(sponsor: Sponsor): string {
+  return sponsor.presenterLabel ?? TIER_META[sponsor.tier].heroLabel;
+}

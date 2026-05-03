@@ -1,23 +1,17 @@
 import { getAllPosts, type PostType } from "@/lib/content";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Blog & Stories — CleanKuakata",
   description: "Read the latest articles, volunteer stories, and updates from the CleanKuakata initiative and Plastic-Free Kuakata 2026.",
 };
 
-const TYPE_CONFIG: Record<PostType, { label: string; color: string; bg: string }> = {
-  blog: { label: "Blog", color: "text-teal", bg: "bg-teal text-white" },
-  story: { label: "Story", color: "text-coral", bg: "bg-coral text-white" },
-  gallery: { label: "Gallery", color: "text-sand", bg: "bg-sand text-charcoal" },
+const TYPE_CONFIG: Record<PostType, { label: string; bg: string }> = {
+  blog:    { label: "Blog",    bg: "bg-teal text-white" },
+  story:   { label: "Story",   bg: "bg-coral text-white" },
+  gallery: { label: "Gallery", bg: "bg-sand text-charcoal" },
 };
-
-const FILTERS: { label: string; value: PostType | "all" }[] = [
-  { label: "All", value: "all" },
-  { label: "Blog", value: "blog" },
-  { label: "Stories", value: "story" },
-  { label: "Gallery", value: "gallery" },
-];
 
 export default function BlogIndex() {
   const posts = getAllPosts();
@@ -27,9 +21,9 @@ export default function BlogIndex() {
       {/* Header */}
       <div className="bg-teal pt-24 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <a href="/" className="text-sand/70 text-sm hover:text-sand transition-colors mb-6 inline-block">
+          <Link href="/" className="text-sand/70 text-sm hover:text-sand transition-colors mb-6 inline-block">
             ← CleanKuakata
-          </a>
+          </Link>
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-3">
             Blog &amp; Stories
           </h1>
@@ -55,7 +49,7 @@ export default function BlogIndex() {
                 year: "numeric",
               });
               return (
-                <a
+                <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
                   className="block bg-white rounded-2xl p-6 md:p-8 border border-charcoal/5 hover:shadow-md transition-shadow group"
@@ -82,7 +76,7 @@ export default function BlogIndex() {
                       ))}
                     </div>
                   )}
-                </a>
+                </Link>
               );
             })}
           </div>
